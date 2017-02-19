@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Lord of the Rings</title>
+
+  <!-- Added link to the jQuery Library -->
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <script type="text/javascript" src="lotr.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="row">
+<!-- Row 1 where user selects their character -->
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+          <h3 class="panel-title">Characters</h3>
+        </div>
+        <div class="thumbnail">
+          <div class="hero" data-health="100" data-attack="50" data-special="horn" data-name="Boromir">
+            <img class="img-responsive" alt="Responsive image" src=./assets/boromir.jpg>
+              <div class="caption">
+                <p class="text-center">Boromir</p>
+              </div>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <div class="hero" data-health="100" data-attack="50" data-special="horn" data-name="Gandalf">
+            <img class="img-responsive" alt="Responsive image" src=./assets/boromir.jpg>
+              <div class="caption">
+                <p class="text-center">Boromir</p>
+              </div>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <div class="hero" data-health="100" data-attack="50" data-special="horn" data-name="Gandalf">
+            <img class="img-responsive" alt="Responsive image" src=./assets/boromir.jpg>
+              <div class="caption">
+                <p class="text-center">Boromir</p>
+              </div>
+          </div>
+        </div>
+        <div class="thumbnail">
+          <div class="hero" data-health="100" data-attack="50" data-special="horn" data-name="Gandalf">
+            <img class="img-responsive" alt="Responsive image" src=./assets/boromir.jpg>
+              <div class="caption">
+                <p class="text-center">Boromir</p>
+              </div>
+          </div>
+        </div>
+<!-- Row 2 where your character stays -->
+  <div class="row yourChar">
+    <div class="col-lg-12">
+      <h3>Your Character</h3>
+    </div>
+  </div>
+
+  <div class="row yourOpp">
+    <div class="col-lg-12">
+      <h3>Enemies Available to Attack</h3>
+    </div>
+  </div>
+
+  <div class="row fight">
+    <div class="col-lg-12">
+      <h3>Your Moves</h3>
+      <input class="btn btn-default" type="button" value="Attack">
+      <input class="btn btn-default" type="button" value="Special">
+    </div>
+  </div>
+  <div class="row currOpp">
+      <div class="col-lg-12">
+        <h3>Opponent</h3>
+      </div>
+    </div>
+
