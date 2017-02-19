@@ -16,21 +16,51 @@ function newGame() {
 
   $(".yourChar, .yourOpp, .currOpp").empty();
 }
-
-
-
+//Select your hero (Works)
   $(".hero").on("click", function(){
-  if (heroChosen === false) {
-    yourHero = $(this).attr("id");
-    heroChosen = true;
-    $(this).appendTo(".yourChar");
-    charArray.splice("id", 1);
-    console.log(charArray);
+    if (heroChosen === false) {
+      yourHero = $(this).attr('data-name');
+      heroChosen = true;
+      health = $(this).attr('data-health');
+      attack = $(this).attr('data-attack');
+      $(this).appendTo(".yourChar");
+    }
+  });
+//Select your opponent (doesn't work)
+  for (i=0; i<charArray.length; i++){
+    if(i === -1){
+      console.log("test");
+    }
   }
-  else {
-    console.log(charArray);
-    console.log(oppenent);
-    // charArray.addClass("enemy");
-    // $(".enemy").appendTo(".yourOpp");
-  }
+//Attack Button (Works) I need to define an enemy attack variable. 
+  $("#attack").on("click", function(){
+    if (heroChosen === true && health >= 0)
+    {
+      health = health - attack;
+      console.log(attack);
+      console.log(health);
+      attack = Number(attack) + 6;
+    }
+    else if(health <= 0)
+      console.log("you're dead")
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+    $(".hero").on("click", function(){
+      if (!yourHero) {
+        enemy = $(this).attr("id");
+        console.log(health);
+        $(this).appendTo(".yourOpp");
+      }
+
 });
