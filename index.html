@@ -7,14 +7,10 @@
   <!-- Added link to the jQuery Library -->
   <!-- Added a link to Bootstrap-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  
-  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-  <script type="text/javascript" src="lotr.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
-
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 </head>
 <body>
-
 <div class="container">
 
   <div class="row">
@@ -23,8 +19,8 @@
       <div class="panel panel-default">
           <h3 class="panel-title">Characters</h3>
         </div>
-        <div class="thumbnail">
-          <div class="hero" data-health="100" data-attack="50" data-special="horn" data-name="Boromir">
+        <div>
+          <div class="hero thumbnail" data-health="100" data-attack="50" data-special="horn" data-name="Boromir">
             <img class="img-responsive" alt="Responsive image" src=./assets/boromir.jpg>
               <div class="caption">
                 <p class="text-center">Boromir</p>
@@ -56,9 +52,9 @@
           </div>
         </div>
 <!-- Row 2 where your character stays -->
-  <div class="row yourChar">
+  <div class="row">
     <div class="col-lg-12">
-      <h3>Your Character</h3>
+      <h3 class="yourChar">Your Character: </h3>
     </div>
   </div>
 
@@ -81,3 +77,6 @@
       </div>
     </div>
 
+
+
+<script type="text/javascript" src="lotr.js"></script>
