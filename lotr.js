@@ -10,6 +10,7 @@ var enemyName = '';
 var hasSpecial = true;
 var audioElement = '';
 
+
 function newGame() {
   yourHero = "";
   enemy = "";
@@ -43,9 +44,9 @@ $(".hero").on("click", function(){
 
 //Attack Button (Works) 
 $("#attack").on("click", function(){
-  var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
-  var isPlayerDead = health <= 0;
-  var isEnemyDead = enemyHealth <= 0;
+var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
+var isPlayerDead = health <= 0;
+var isEnemyDead = enemyHealth <= 0;
 
   if (playersChosenAndAlive){
     health = health - enemyAttack;
@@ -53,14 +54,6 @@ $("#attack").on("click", function(){
     attack = Number(attack) + 6;
     $(".health").text(yourHero + " " + "HP: " + health);
     $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
-  }
-  else if(isPlayerDead){
-    console.log("you're dead");
-  }
-  else if (isEnemyDead){
-    console.log("win");
-    
-    $(".enemyHealth").text('')
   }
   checkVictory();
 });
@@ -77,7 +70,6 @@ $("#special").on("click", function(){
     attack = 1000;
     health = Number(health) + 20
     return hasSpecial = false;
-
   }
   if (yourHero === "Legolas" && hasSpecial === true){
     alert("My arrows fly true. Your damage has increased and your enemies attack decreased");
@@ -96,14 +88,14 @@ $("#special").on("click", function(){
 
 function checkVictory(){
   if(enemyHealth <= 0){
-    alert("YOU BEAT THE GAME");
     $(enemy).fadeOut();
+    // $(".enemyHealth").toggle();
     score++;
     console.log(score);
+    alert("YOU BEAT THE GAME, Choose your next opponent");
   }
-  else if (score >= 3){
-    newGame();
-    console.log("new game");
+  else if (health <= 0){
+    alert("The enemy has found the Ring");
   }
 }
 
