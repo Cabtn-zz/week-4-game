@@ -73,7 +73,7 @@ $("#special").on("click", function(){
   }
   if (yourHero === "Legolas" && hasSpecial === true){
     alert("My arrows fly true. Your damage has increased and your enemies attack decreased");
-    attack = Number(attack) * 5
+    attack = Number(attack) * 3
     enemyAttack = 1
     health = Number(health) + 20;
     return hasSpecial = false;
