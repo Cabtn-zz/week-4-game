@@ -9,6 +9,10 @@ var enemyAttack = '';
 var enemyName = '';
 var hasSpecial = true;
 var audioElement = '';
+var theGrey = './assets/gandalf.jpg';
+var theWhite = './assets/gwhite.jpg';
+var music = './assets/background.mp3';
+var horn = './assets/gondor.mp3';
 
 
 function newGame() {
@@ -61,6 +65,7 @@ var isEnemyDead = enemyHealth <= 0;
 $("#special").on("click", function(){ 
   if (yourHero === "Boromir" && hasSpecial === true){
     alert("HORN OF GONDOR. Your health has been doubled and you are strong");
+    $('audio[src="' + music + '"]').attr('src', horn);
     health = Number(health) * 2;
     attack = Number(attack) + 20;
     return hasSpecial = false;
@@ -95,11 +100,18 @@ function checkVictory(){
     alert("YOU BEAT THE GAME, Choose your next opponent");
   }
   else if (health <= 0){
-    alert("The enemy has found the Ring");
+      if (yourHero === "Gandalf"){
+        console.log('is this running?')
+        $('img[src="' + theGrey + '"]').attr('src', theWhite);
+        alert("I come back to you now at the turn of the tide")
+        health = 1000;
+        attack = 1000; 
+      }
+    else {
+      alert("The enemy has found the Ring");
+    }
   }
 }
-
- 
 
 
 
