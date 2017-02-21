@@ -74,14 +74,13 @@ var isEnemyDead = enemyHealth <= 0;
 //Special buttons, different depending on your character
 $("#special").on("click", function(){ 
   if (yourHero === "Boromir" && hasSpecial === true){
-    alert("HORN OF GONDOR. Your health has been doubled and you are strong");
+    alert("HORN OF GONDOR. Your health has been doubled and you are stronger");
     $('audio').attr('src', horn);
     health = Number(health) * 2;
     attack = Number(attack) + 20;
     return hasSpecial = false;
   }
   if (yourHero === "Gandalf" && hasSpecial === true){
-    alert("YOU SHALL NOT PASS");
     $('audio').attr('src', pass);
     enemyHealth = Number(enemyHealth) - 300;
     health = Number(health) + 20
@@ -113,14 +112,14 @@ function checkVictory(){
     alert("The Lord of the Ring has arrived")
     return secret = true
     enemyHealth = 4000;
-    enemyAttack = 200;
+    enemyAttack = 100;
   }
   else if(enemyHealth <= 0){
     $(enemy).fadeOut();
     // $(".enemyHealth").toggle();
     score++;
     console.log(score);
-    alert("You won this round, Choose your next opponent");
+    alert("You won this round, choose your next opponent");
   }
   else if (health <= 0){
       if (yourHero === "Gandalf" && revive === false){
@@ -128,7 +127,7 @@ function checkVictory(){
         $('img[src="' + theGrey + '"]').attr('src', theWhite);
         $('audio').attr('src', gWhite);
         health = 1000;
-        attack = 1000;
+        attack = 400;
         return revive = true; 
         return hasSpecial = true;
       }
