@@ -52,10 +52,13 @@ $(".hero").on("click", function(){
     $(this).appendTo(".currOpp");
     enemyHealth = $(this).attr('data-health')
     enemyAttack = $(this).attr('data-attack')
+    $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
   }
 });
 //Attack Button (Works) 
 $("#attack").on("click", function(){
+  $(".health").text(yourHero + " " + "HP: " + health);
+  $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
 //Created these variables to make it easer to read the if statement
 var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
 var isPlayerDead = health <= 0;
@@ -78,12 +81,16 @@ $("#special").on("click", function(){
     $('audio').attr('src', horn);
     health = Number(health) * 2;
     attack = Number(attack) + 20;
+    $(".health").text(yourHero + " " + "HP: " + health);
+    $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
     return hasSpecial = false;
   }
   if (yourHero === "Gandalf" && hasSpecial === true){
     $('audio').attr('src', pass);
     enemyHealth = Number(enemyHealth) - 300;
     health = Number(health) + 20
+    $(".health").text(yourHero + " " + "HP: " + health);
+    $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
     return hasSpecial = false;
   }
   if (yourHero === "Legolas" && hasSpecial === true){
@@ -92,6 +99,8 @@ $("#special").on("click", function(){
     attack = Number(attack) * 3
     enemyAttack = 1
     health = Number(health) + 20;
+    $(".health").text(yourHero + " " + "HP: " + health);
+    $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
     return hasSpecial = false;
   }
   if (yourHero === "Saruman" && hasSpecial === true){
@@ -99,6 +108,8 @@ $("#special").on("click", function(){
     $('audio').attr('src', saruman);
     enemyHealth = 1;
     health = Number(health) + 50;
+    $(".health").text(yourHero + " " + "HP: " + health);
+    $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
     return hasSpecial = false;
   }
 });
@@ -106,12 +117,12 @@ $("#special").on("click", function(){
 function checkVictory(){
   var secretLevel = enemyHealth <=0 && score > 1 && secret === false
   if (secretLevel){
-    // $(".currOpp").fadeOut();
     $('img[src="' + sarumanImg + '"]').attr('src', sauronImg);
     $('audio').attr('src', sauron);
     alert("The Lord of the Ring has arrived")
     enemyHealth = 4000;
     enemyAttack = 100;
+    $(".enemyHealth").text("Sauron HP: " + enemyHealth);
     return secret = true
     
   }
