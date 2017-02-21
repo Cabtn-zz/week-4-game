@@ -9,6 +9,7 @@ var enemyAttack = '';
 var enemyName = '';
 var hasSpecial = true;
 var audioElement = '';
+var secret = false;
 var theGrey = './assets/gandalf.jpg';
 var theWhite = './assets/gwhite.jpg';
 var music = './assets/background.mp3';
@@ -102,11 +103,14 @@ $("#special").on("click", function(){
 });
 
 function checkVictory(){
-  if (enemyHealth <=0 && score > 0){
+  var secretLevel = enemyHealth <=0 && score > 1 && secret === false
+  if (secretLevel){
+    // $(".currOpp").fadeOut();
     $('img[src="' + sarumanImg + '"]').attr('src', sauronImg);
     $('audio').attr('src', sauron);
     alert("The Lord of the Ring has arrived")
-    enemyHealth = 2000;
+    return secret = true
+    enemyHealth = 4000;
     enemyAttack = 200;
   }
   else if(enemyHealth <= 0){
@@ -121,11 +125,10 @@ function checkVictory(){
         console.log('is this running?')
         $('img[src="' + theGrey + '"]').attr('src', theWhite);
         $('audio').attr('src', gWhite);
-        alert("I come back to you now at the turn of the tide")
         health = 1000;
         attack = 1000;
         return revive = true; 
-        return hasSpecial = tr
+        return hasSpecial = true;
       }
     else {
       alert("The enemy has found the Ring");
