@@ -110,9 +110,10 @@ function checkVictory(){
     $('img[src="' + sarumanImg + '"]').attr('src', sauronImg);
     $('audio').attr('src', sauron);
     alert("The Lord of the Ring has arrived")
-    return secret = true
     enemyHealth = 4000;
     enemyAttack = 100;
+    return secret = true
+    
   }
   else if(enemyHealth <= 0){
     $(enemy).fadeOut();
@@ -123,7 +124,6 @@ function checkVictory(){
   }
   else if (health <= 0){
       if (yourHero === "Gandalf" && revive === false){
-        console.log('is this running?')
         $('img[src="' + theGrey + '"]').attr('src', theWhite);
         $('audio').attr('src', gWhite);
         health = 1000;
