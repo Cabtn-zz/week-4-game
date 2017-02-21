@@ -13,7 +13,13 @@ var theGrey = './assets/gandalf.jpg';
 var theWhite = './assets/gwhite.jpg';
 var music = './assets/background.mp3';
 var horn = './assets/gondor.mp3';
-
+var pass = './assets/shallnotpass.mp3';
+var bow = './assets/legolas.mp3';
+var saruman ='./assets/saruman.mp3';
+var sauron ='./assets/sauron.mp3';
+var sarumanImg = './assets/saruman.jpg';
+var sauronImg = './assets/sauron.jpg';
+var revive = false; 
 
 function newGame() {
   yourHero = "";
@@ -72,12 +78,14 @@ $("#special").on("click", function(){
   }
   if (yourHero === "Gandalf" && hasSpecial === true){
     alert("YOU SHALL NOT PASS");
-    attack = 1000;
+    $('audio[src="' + music + '"]').attr('src', pass);
+    enemyHealth = Number(enemyHealth) - 300;
     health = Number(health) + 20
     return hasSpecial = false;
   }
   if (yourHero === "Legolas" && hasSpecial === true){
     alert("My arrows fly true. Your damage has increased and your enemies attack decreased");
+    $('audio[src="' + music + '"]').attr('src', bow);
     attack = Number(attack) * 3
     enemyAttack = 1
     health = Number(health) + 20;
@@ -85,6 +93,7 @@ $("#special").on("click", function(){
   }
   if (yourHero === "Saruman" && hasSpecial === true){
     alert("YOU MUST JOIN SAURON. Enemy health is now 1");
+    $('audio[src="' + music + '"]').attr('src', saruman);
     enemyHealth = 1;
     health = Number(health) + 50;
     return hasSpecial = false;
@@ -92,20 +101,32 @@ $("#special").on("click", function(){
 });
 
 function checkVictory(){
-  if(enemyHealth <= 0){
+  if (enemyHealth <=0 && score > 1){
+    $('img[src="' + sarumanImg + '"]').attr('src', sauronImg);
+    $('audio[src="' + music + '"]').attr('src', sauron);
+    $('audio[src="' + saruman + '"]').attr('src', sauron);
+    $('audio[src="' + bow + '"]').attr('src', sauron);
+    $('audio[src="' + horn + '"]').attr('src', sauron);
+    $('audio[src="' + pass + '"]').attr('src', sauron);
+    alert("The Lord of the Ring has arrived")
+    enemyHealth = 2000;
+    enemyAttack = 200;
+  }
+  else if(enemyHealth <= 0){
     $(enemy).fadeOut();
     // $(".enemyHealth").toggle();
     score++;
     console.log(score);
-    alert("YOU BEAT THE GAME, Choose your next opponent");
+    alert("You won this round, Choose your next opponent");
   }
   else if (health <= 0){
-      if (yourHero === "Gandalf"){
+      if (yourHero === "Gandalf" && revive === false){
         console.log('is this running?')
         $('img[src="' + theGrey + '"]').attr('src', theWhite);
         alert("I come back to you now at the turn of the tide")
         health = 1000;
-        attack = 1000; 
+        attack = 1000;
+        return revive = true; 
       }
     else {
       alert("The enemy has found the Ring");
