@@ -22,7 +22,7 @@ var gWhite ='./assets/gwhite.mp3';
 var sarumanImg = './assets/saruman.jpg';
 var sauronImg = './assets/sauron.jpg';
 var revive = false; 
-
+//I need to fix this to work with a restart button. This is essentially a blank slate. [Doesn't work]
 function newGame() {
   yourHero = "";
   enemy = "";
@@ -44,6 +44,7 @@ $(".hero").on("click", function(){
     $(this).appendTo(".yourChar");
     $(".remainingChar").appendTo(".yourOpp");
   }
+  //Your second click selects your enemy
   else {
     enemyName = $(this).attr('data-name');
     enemyChosen = true;
@@ -53,13 +54,13 @@ $(".hero").on("click", function(){
     enemyAttack = $(this).attr('data-attack')
   }
 });
-
 //Attack Button (Works) 
 $("#attack").on("click", function(){
+//Created these variables to make it easer to read the if statement
 var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
 var isPlayerDead = health <= 0;
 var isEnemyDead = enemyHealth <= 0;
-
+//This changes the health/attack/and enemy health
   if (playersChosenAndAlive){
     health = health - enemyAttack;
     enemyHealth = enemyHealth - attack;
@@ -67,9 +68,10 @@ var isEnemyDead = enemyHealth <= 0;
     $(".health").text(yourHero + " " + "HP: " + health);
     $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
   }
+  //victory function, will you summon Sauron?
   checkVictory();
 });
-//Special buttons (works mostly)
+//Special buttons, different depending on your character
 $("#special").on("click", function(){ 
   if (yourHero === "Boromir" && hasSpecial === true){
     alert("HORN OF GONDOR. Your health has been doubled and you are strong");
@@ -101,7 +103,7 @@ $("#special").on("click", function(){
     return hasSpecial = false;
   }
 });
-
+//check to see if you face sauron, revive as gandalf the white or if you lose.
 function checkVictory(){
   var secretLevel = enemyHealth <=0 && score > 1 && secret === false
   if (secretLevel){
