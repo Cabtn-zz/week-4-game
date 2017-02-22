@@ -3,16 +3,13 @@
 	float:left;
 }
 
-embed {
-	width:1px;
-	height: 1px;
-}
 audio {
-	display: none;
+
 }
 
 body {
 	background-image: url(./assets/other.jpg);
+	background-repeat: no-repeat;
 	
 }
 
