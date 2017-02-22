@@ -28,7 +28,7 @@ function game() {
   //I need to fix this to work with a restart button. This is essentially a blank slate. [Doesn't work]
   function startGame() {
   //Select your hero (Works)
-    $(".hero").on("click", function(){
+    $(".hero").on("click", function characterSelect(){
       if (heroChosen === false) {
         yourHero = $(this).attr('data-name');
         heroChosen = true;
@@ -51,7 +51,7 @@ function game() {
       }
     });
     //Attack Button (Works) 
-    $("#attack").on("click", function(){
+    $("#attack").on("click", function battle(){
       hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health +" Attack: " + attack);
       enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
     //Created these variables to make it easer to read the if statement
@@ -71,16 +71,17 @@ function game() {
     });
     //Special buttons, different depending on your character
     $("#special").on("click", function(){ 
-      if (yourHero === "Boromir" && hasSpecial === true){
+      if (yourHero === "Boromir" && hasSpecial === true && health > 0){
         alert("HORN OF GONDOR. Your health has been doubled and you are stronger");
         $('audio').attr('src', horn);
         health = Number(health) * 2;
         attack = Number(attack) + 20;
+
         hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
         enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
-      if (yourHero === "Gandalf" && hasSpecial === true){
+      if (yourHero === "Gandalf" && hasSpecial === true && health > 0){
         $('audio').attr('src', pass);
         enemyHealth = Number(enemyHealth) - 300;
         health = Number(health) + 20
@@ -88,7 +89,7 @@ function game() {
         enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
-      if (yourHero === "Legolas" && hasSpecial === true){
+      if (yourHero === "Legolas" && hasSpecial === true && health > 0){
         alert("My arrows fly true. Your damage has increased and your enemies attack decreased");
         $('audio').attr('src', bow);
         attack = Number(attack) * 3
@@ -98,7 +99,7 @@ function game() {
         enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
-      if (yourHero === "Saruman" && hasSpecial === true){
+      if (yourHero === "Saruman" && hasSpecial === true && health > 0){
         alert("YOU MUST JOIN SAURON. Enemy health is now 1");
         $('audio').attr('src', saruman);
         enemyHealth = 1;
@@ -117,7 +118,7 @@ function game() {
         alert("The Lord of the Ring has arrived")
         enemyHealth = 4000;
         enemyAttack = 100;
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        enemyHitPoints = $(".currOpp").find("p").text(Sauron + " " + "HP: " + enemyHealth);
         return secret = true 
       }
       else if(enemyHealth <= 0){
@@ -130,7 +131,7 @@ function game() {
           if (yourHero === "Gandalf" && revive === false){
             $('img[src="' + theGrey + '"]').attr('src', theWhite);
             $('audio').attr('src', gWhite);
-            health = 1000;
+            health = 1001;
             attack = 400;
             hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);;
             return hasSpecial = true;
