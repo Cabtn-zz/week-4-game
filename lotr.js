@@ -9,8 +9,9 @@ function game() {
   var enemyAttack = '';
   var enemyName = '';
   var hasSpecial = true;
-  var audioElement = '';
   var secret = false;
+  var hitopints = '';
+  var enemyHitPoints
   var theGrey = './assets/gandalf.jpg';
   var theWhite = './assets/gwhite.jpg';
   var music = './assets/background.mp3';
@@ -24,7 +25,6 @@ function game() {
   var sauronImg = './assets/sauron.jpg';
   var revive = false; 
   startGame();
-
   //I need to fix this to work with a restart button. This is essentially a blank slate. [Doesn't work]
   function startGame() {
   //Select your hero (Works)
@@ -32,12 +32,12 @@ function game() {
       if (heroChosen === false) {
         yourHero = $(this).attr('data-name');
         heroChosen = true;
+        var element = $(".remainingChar").detach();
         health = $(this).attr('data-health');
-        $("#gHealth").replaceWith(health);
         attack = $(this).attr('data-attack');
-        // $(".stats").replaceWith(yourHero + " " + "HP: " + health)
         $(this).appendTo(".yourChar");
-        $(".remainingChar").appendTo(".yourOpp");
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);
+        $(element).appendTo(".yourOpp");
       }
       //Your second click selects your enemy
       else {
@@ -46,15 +46,14 @@ function game() {
         $(this).appendTo(".currOpp");
         enemyHealth = $(this).attr('data-health')
         enemyAttack = $(this).attr('data-attack')
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         enemyChosen = true;
       }
     });
     //Attack Button (Works) 
     $("#attack").on("click", function(){
-      $(".health").text(yourHero + " " + "HP: " + health);
-      $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
-
+      hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health +" Attack: " + attack);
+      enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
     //Created these variables to make it easer to read the if statement
     var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
     var isPlayerDead = health <= 0;
@@ -63,13 +62,12 @@ function game() {
       if (playersChosenAndAlive){
         health = health - enemyAttack;
         enemyHealth = enemyHealth - attack;
-        attack = Number(attack) + 6;
-        $(".health").text(yourHero + " " + "HP: " + health);
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        attack = Number(attack) + 7;
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
       }
       //victory function, will you summon Sauron?
       checkVictory();
-
     });
     //Special buttons, different depending on your character
     $("#special").on("click", function(){ 
@@ -78,16 +76,16 @@ function game() {
         $('audio').attr('src', horn);
         health = Number(health) * 2;
         attack = Number(attack) + 20;
-        $(".health").text(yourHero + " " + "HP: " + health);
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
       if (yourHero === "Gandalf" && hasSpecial === true){
         $('audio').attr('src', pass);
         enemyHealth = Number(enemyHealth) - 300;
         health = Number(health) + 20
-        $(".health").text(yourHero + " " + "HP: " + health);
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
       if (yourHero === "Legolas" && hasSpecial === true){
@@ -96,8 +94,8 @@ function game() {
         attack = Number(attack) * 3
         enemyAttack = 1
         health = Number(health) + 20;
-        $(".health").text(yourHero + " " + "HP: " + health);
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
       if (yourHero === "Saruman" && hasSpecial === true){
@@ -105,8 +103,8 @@ function game() {
         $('audio').attr('src', saruman);
         enemyHealth = 1;
         health = Number(health) + 50;
-        $(".health").text(yourHero + " " + "HP: " + health);
-        $(".enemyHealth").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
         return hasSpecial = false;
       }
     });
@@ -119,13 +117,11 @@ function game() {
         alert("The Lord of the Ring has arrived")
         enemyHealth = 4000;
         enemyAttack = 100;
-        $(".enemyHealth").text("Sauron HP: " + enemyHealth);
-        return secret = true
-        
+        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        return secret = true 
       }
       else if(enemyHealth <= 0){
         $(enemy).fadeOut();
-        // $(".enemyHealth").toggle();
         score++;
         console.log(score);
         alert("You won this round, choose your next opponent");
@@ -136,7 +132,7 @@ function game() {
             $('audio').attr('src', gWhite);
             health = 1000;
             attack = 400;
-            $(".health").text(yourHero + " " + "HP: " + health);
+            hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);;
             return hasSpecial = true;
             return revive = true; 
           }
@@ -146,13 +142,15 @@ function game() {
       }
     }
   }
-}
+
  $("#restart").on("click", function(){
-    window.location.reload();
+    $(enemy).fadeIn();
+    $(".yourHero, .yourOpp, .yourChar, .currOpp").appendTo(".reset");
+    game();
     console.log("test");
-  })
+  });
 
-
+}
 
 
 
