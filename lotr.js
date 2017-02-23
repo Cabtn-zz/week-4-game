@@ -1,17 +1,21 @@
 function game() {
   var yourHero = '';
-  var enemy = '';
   var score = 0;
   var health = '';
+
   var heroChosen = false;
   var enemyChosen = false;
+  var revive = false; 
+  var secret = false;
+  var hasSpecial = true;
+
+  var enemy = '';
   var enemyHealth = '';
   var enemyAttack = '';
   var enemyName = '';
-  var hasSpecial = true;
-  var secret = false;
-  var hitopints = '';
-  var enemyHitPoints
+  var hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health +" Attack: " + attack);
+  var enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth + " Attack " +enemyAttack);
+  
   var theGrey = './assets/gandalf.jpg';
   var theWhite = './assets/gwhite.jpg';
   var music = './assets/background.mp3';
@@ -23,7 +27,7 @@ function game() {
   var gWhite ='./assets/gwhite.mp3';
   var sarumanImg = './assets/saruman.jpg';
   var sauronImg = './assets/sauron.jpg';
-  var revive = false; 
+
   startGame();
   //I need to fix this to work with a restart button. This is essentially a blank slate. [Doesn't work]
   function startGame() {
@@ -50,10 +54,9 @@ function game() {
         enemyChosen = true;
       }
     });
+
     //Attack Button (Works) 
-    $("#attack").on("click", function battle(){
-      hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health +" Attack: " + attack);
-      enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+    $("#attack").on("click", function battle(){    
     //Created these variables to make it easer to read the if statement
     var playersChosenAndAlive = heroChosen === true && enemyChosen === true && health > 0 && enemyHealth > 0;
     var isPlayerDead = health <= 0;
@@ -63,30 +66,31 @@ function game() {
         health = health - enemyAttack;
         enemyHealth = enemyHealth - attack;
         attack = Number(attack) + 7;
-        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints
+        enemyHitPoints 
+        
       }
       //victory function, will you summon Sauron?
       checkVictory();
     });
+
     //Special buttons, different depending on your character
-    $("#special").on("click", function(){ 
+    $("#special").on("click", function(){      
       if (yourHero === "Boromir" && hasSpecial === true && health > 0){
         alert("HORN OF GONDOR. Your health has been doubled and you are stronger");
         $('audio').attr('src', horn);
         health = Number(health) * 2;
         attack = Number(attack) + 20;
-
-        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints 
+        enemyHitPoints
         return hasSpecial = false;
       }
       if (yourHero === "Gandalf" && hasSpecial === true && health > 0){
         $('audio').attr('src', pass);
         enemyHealth = Number(enemyHealth) - 300;
         health = Number(health) + 20
-        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints 
+        enemyHitPoints 
         return hasSpecial = false;
       }
       if (yourHero === "Legolas" && hasSpecial === true && health > 0){
@@ -95,30 +99,34 @@ function game() {
         attack = Number(attack) * 3
         enemyAttack = 1
         health = Number(health) + 20;
-        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        hitPoints 
+        enemyHitPoints 
         return hasSpecial = false;
       }
       if (yourHero === "Saruman" && hasSpecial === true && health > 0){
         alert("YOU MUST JOIN SAURON. Enemy health is now 1");
-        $('audio').attr('src', saruman);
-        enemyHealth = 1;
+      enemyHealth = 1;
         health = Number(health) + 50;
-        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
-        enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth);
+        $('audio').attr('src', saruman);
+        hitPoints    
+        enemyHitPoints 
         return hasSpecial = false;
       }
     });
+
     //check to see if you face sauron, revive as gandalf the white or if you lose.
     function checkVictory(){
       var secretLevel = enemyHealth <=0 && score > 1 && secret === false
+        enemyHitPoints = $(".currOpp").find("p").text("Sauron" + " " + "HP: " + enemyHealth + " Attack " +enemyAttack);
+        hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health +" Attack: " + attack);
+
       if (secretLevel){
         $('img[src="' + sarumanImg + '"]').attr('src', sauronImg);
         $('audio').attr('src', sauron);
         alert("The Lord of the Ring has arrived")
         enemyHealth = 4000;
         enemyAttack = 100;
-        enemyHitPoints = $(".currOpp").find("p").text(Sauron + " " + "HP: " + enemyHealth);
+        enemyHitPoints 
         return secret = true 
       }
       else if(enemyHealth <= 0){
@@ -133,7 +141,7 @@ function game() {
             $('audio').attr('src', gWhite);
             health = 1001;
             attack = 400;
-            hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);;
+            hitPoints 
             return hasSpecial = true;
             return revive = true; 
           }
