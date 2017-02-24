@@ -16,8 +16,6 @@ function game() {
     var enemyHitPoints = $(".currOpp").find("p").text(enemyName + " " + "HP: " + enemyHealth + " Attack " + enemyAttack);
     var hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health + " Attack: " + attack);
 
-
-
     var theGrey = './assets/gandalf.jpg';
     var theWhite = './assets/gwhite.jpg';
     var music = './assets/background.mp3';
@@ -36,16 +34,16 @@ function game() {
         //Select your hero (Works)
         $(".hero").on("click", function characterSelect() {
              if (heroChosen === false) {
-                yourHero = $(this).attr('data-name');
-                heroChosen = true;
-                var element = $(".remainingChar").detach();
-                health = $(this).attr('data-health');
-                attack = $(this).attr('data-attack');
-                $(this).appendTo(".yourChar");
-                hero = this;
-                hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);
-                $(element).appendTo(".yourOpp");
-        } 
+                  yourHero = $(this).attr('data-name');
+                  heroChosen = true;
+                  var element = $(".remainingChar").detach();
+                  health = $(this).attr('data-health');
+                  attack = $(this).attr('data-attack');
+                  $(this).appendTo(".yourChar");
+                  hero = this;
+                  hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);
+                  $(element).appendTo(".yourOpp");
+            } 
             //Your second click selects your enemy
             else {
                 enemyName = $(this).attr('data-name');
@@ -78,7 +76,7 @@ function game() {
         });
 
         //Special buttons, different depending on your character
-        $("#special").on("click", function() {
+        $("#special").on("click", function specialMoves() {
           if (hasSpecial === true && health > 0)
             if (yourHero === "Boromir") {
                 alert("HORN OF GONDOR. Your health has been doubled and you are stronger");
@@ -145,7 +143,7 @@ function game() {
         }
     }
 
-    $("#restart").on("click", function() {
+    $("#restart").on("click", function restartGame() {
         $(enemy).fadeIn();
         $(".yourHero, .yourOpp, .yourChar, .currOpp").appendTo(".reset");
         game();
