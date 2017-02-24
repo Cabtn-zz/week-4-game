@@ -42,6 +42,7 @@ function game() {
                 health = $(this).attr('data-health');
                 attack = $(this).attr('data-attack');
                 $(this).appendTo(".yourChar");
+                hero = this;
                 hitPoints = $(".yourChar").find("p").text(yourHero + " " + "HP: " + health);
                 $(element).appendTo(".yourOpp");
         } 
