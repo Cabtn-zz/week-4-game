@@ -111,7 +111,7 @@ function game() {
         //check to see if you face sauron, revive as gandalf the white or if you lose.
         function checkVictory() {
             var secretLevel = enemyHealth <= 0 && score > 1 && secret === false
-            enemyHitPoints.text("Sauron" + " " + "HP: " + enemyHealth + " Attack " + enemyAttack);
+            enemyHitPoints.text(enemyName + " " + "HP: " + enemyHealth + " Attack " + enemyAttack);
             hitPoints.text(yourHero + " " + "HP: " + health + " Attack: " + attack);
 
             if (secretLevel) {
@@ -136,8 +136,9 @@ function game() {
                     hitPoints.text(yourHero + " " + "HP: " + health + " Attack: " + attack);
                     return hasSpecial = true;
                     return revive = true;
-                } else {
-                    alert("The enemy has found the Ring");
+                }
+                else {
+                    alert("The enemy has found the Ring. You lose");
                 }
             }
         }
